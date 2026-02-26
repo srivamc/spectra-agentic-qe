@@ -1,9 +1,8 @@
 """
-SPECTRA Context Manager
-Manages session-level and global context for the SPECTRA agent pipeline.
+ContractIQ Context Manager
+Manages session-level and global context for the ContractIQ agent pipeline.
 Provides shared state between all agents across the 3-layer architecture.
 """
-
 from __future__ import annotations
 import uuid
 import json
@@ -13,11 +12,10 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from loguru import logger
 
-
 @dataclass
-class SPECTRAContext:
+class ContractIQContext:
     """
-    Primary context object shared across all SPECTRA agents.
+    Primary context object shared across all ContractIQ agents.
     Encapsulates configuration, runtime state, and knowledge artifacts.
     """
     # Configuration
@@ -30,14 +28,14 @@ class SPECTRAContext:
     scenarios: str = "all"
     healing_enabled: bool = True
     report_format: str = "html"
-    ai_model: str = "claude-sonnet-4-5"
+    ai_model: str = "claude-3-5-sonnet-latest"
     output_dir: str = "./reports"
     dry_run: bool = False
 
     # Session tracking
     session_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     started_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
-    project_name: str = "spectra-project"
+    project_name: str = "contractiq-project"
 
     # Spec analysis results (populated by Layer 0)
     spec_type: Optional[str] = None  # openapi | postman | asyncapi | graphql | playwright-har
@@ -161,23 +159,23 @@ class GlobalContext:
 
         # Defaults
         self._config = {
-            "platform": "spectra",
+            "platform": "contractiq",
             "version": "1.0.0",
-            "ai_provider": os.getenv("SPECTRA_AI_PROVIDER", "anthropic"),
-            "ai_model": os.getenv("SPECTRA_AI_MODEL", "claude-sonnet-4-5"),
-            "mcp_server_url": os.getenv("SPECTRA_MCP_URL", "http://localhost:8765"),
-            "memory_db_path": os.getenv("MEMORY_DB_PATH", ".spectra/memory.db"),
+            "ai_provider": os.getenv("CONTRACTIQ_AI_PROVIDER", "anthropic"),
+            "ai_model": os.getenv("CONTRACTIQ_AI_MODEL", "claude-3-5-sonnet-latest"),
+            "mcp_server_url": os.getenv("CONTRACTIQ_MCP_URL", "http://localhost:8765"),
+            "memory_db_path": os.getenv("MEMORY_DB_PATH", ".contractiq/memory.db"),
             "playwright_headless": os.getenv("PLAYWRIGHT_HEADLESS", "true").lower() == "true",
-            "log_level": os.getenv("SPECTRA_LOG_LEVEL", "INFO"),
-            "max_healing_attempts": int(os.getenv("SPECTRA_MAX_HEALING_ATTEMPTS", "5")),
-            "request_timeout_seconds": int(os.getenv("SPECTRA_REQUEST_TIMEOUT", "30")),
+            "log_level": os.getenv("CONTRACTIQ_LOG_LEVEL", "INFO"),
+            "max_healing_attempts": int(os.getenv("CONTRACTIQ_MAX_HEALING_ATTEMPTS", "5")),
+            "request_timeout_seconds": int(os.getenv("CONTRACTIQ_REQUEST_TIMEOUT", "30")),
         }
 
         # Load from config file if provided
         if config_path and Path(config_path).exists():
             with open(config_path) as f:
                 file_config = json.load(f)
-                self._config.update(file_config)
+            self._config.update(file_config)
 
         logger.debug(f"GlobalContext loaded with {len(self._config)} settings")
 
