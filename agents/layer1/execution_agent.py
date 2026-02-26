@@ -1,4 +1,4 @@
-"""SPECTRA Execution Agent - Layer 1
+"""ContractIQ Execution Agent - Layer 1
 
 Orchestrates parallel test execution with 100+ concurrent threads.
 Supports API and UI test execution with intelligent resource management.
