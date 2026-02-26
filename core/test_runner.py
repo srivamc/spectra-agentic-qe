@@ -1,9 +1,8 @@
 """
-SPECTRA Test Runner
+ContractIQ Test Runner
 Parallel test execution engine supporting API and UI tests.
 Handles concurrent execution with configurable thread pools.
 """
-
 from __future__ import annotations
 
 import asyncio
@@ -14,7 +13,7 @@ from typing import Any, Dict, List, Optional, Callable
 from enum import Enum
 from loguru import logger
 
-from core.context_manager import SPECTRAContext
+from core.context_manager import ContractIQContext
 
 
 class TestStatus(str, Enum):
@@ -86,10 +85,10 @@ class ExecutionResult:
     timestamp: str = ""
 
 
-class SPECTRATestRunner:
-    """Parallel test execution engine for SPECTRA framework."""
+class ContractIQTestRunner:
+    """Parallel test execution engine for ContractIQ framework."""
 
-    def __init__(self, context: SPECTRAContext, max_workers: int = 100):
+    def __init__(self, context: ContractIQContext, max_workers: int = 100):
         self.context = context
         self.max_workers = max_workers
         self._api_client = None
@@ -198,6 +197,7 @@ class SPECTRATestRunner:
                 await self._execute_ui_test(tc)
             else:
                 await self._execute_mixed_test(tc)
+
         except asyncio.TimeoutError:
             tc.status = TestStatus.ERROR
             tc.error = f"Test timed out after {tc.timeout}s"
@@ -224,7 +224,6 @@ class SPECTRATestRunner:
     async def _execute_api_test(self, tc: TestCase) -> None:
         """Execute an API test case using httpx."""
         import httpx
-
         base_url = self.context.target_url or ""
         url = f"{base_url}{tc.endpoint}"
 
@@ -238,38 +237,36 @@ class SPECTRATestRunner:
                 json=tc.body
             )
 
-        # Validate status
-        if response.status_code != tc.expected_status:
-            tc.status = TestStatus.FAILED
-            tc.error = f"Expected {tc.expected_status}, got {response.status_code}"
-            tc.result = {"status_code": response.status_code, "body": response.text[:500]}
-            return
-
-        # Validate schema if provided
-        if tc.expected_schema:
-            from jsonschema import validate, ValidationError
-            try:
-                validate(instance=response.json(), schema=tc.expected_schema)
-            except ValidationError as e:
+            # Validate status
+            if response.status_code != tc.expected_status:
                 tc.status = TestStatus.FAILED
-                tc.error = f"Schema validation failed: {e.message}"
+                tc.error = f"Expected {tc.expected_status}, got {response.status_code}"
+                tc.result = {"status_code": response.status_code, "body": response.text[:500]}
                 return
 
-        tc.status = TestStatus.PASSED
-        tc.result = {
-            "status_code": response.status_code,
-            "response_time_ms": response.elapsed.total_seconds() * 1000,
-            "body_preview": response.text[:200]
-        }
+            # Validate schema if provided
+            if tc.expected_schema:
+                from jsonschema import validate, ValidationError
+                try:
+                    validate(instance=response.json(), schema=tc.expected_schema)
+                except ValidationError as e:
+                    tc.status = TestStatus.FAILED
+                    tc.error = f"Schema validation failed: {e.message}"
+                    return
+
+            tc.status = TestStatus.PASSED
+            tc.result = {
+                "status_code": response.status_code,
+                "response_time_ms": response.elapsed.total_seconds() * 1000,
+                "body_preview": response.text[:200]
+            }
 
     async def _execute_ui_test(self, tc: TestCase) -> None:
         """Execute a UI test case using Playwright."""
         from playwright.async_api import async_playwright
-
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=True)
             page = await browser.new_page()
-
             try:
                 for step in tc.ui_steps:
                     action = step.get("action", "")
@@ -288,7 +285,7 @@ class SPECTRATestRunner:
                     elif action == "assert_visible":
                         assert await page.is_visible(selector), f"Element not visible: {selector}"
                     elif action == "screenshot":
-                        await page.screenshot(path=f"/tmp/spectra_{tc.id}.png")
+                        await page.screenshot(path=f"/tmp/contractiq_{tc.id}.png")
 
                 tc.status = TestStatus.PASSED
                 tc.result = {"steps_completed": len(tc.ui_steps)}
