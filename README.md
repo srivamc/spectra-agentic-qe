@@ -1,4 +1,4 @@
-# SPECTRA: Spec-driven, Platform-agnostic, Extensible, Cloud-ready Test Runner with Agentic AI
+# ContractIQ: Autonomous Contract-Driven Quality Engineering
 
 > **The "CEO of Quality" for the Modern SDLC.**
 
@@ -8,11 +8,11 @@
 
 ---
 
-## What is SPECTRA?
+## What is ContractIQ?
 
-**SPECTRA** is a fully generic, spec-driven agentic test automation framework designed to test **UI applications** and **backend REST/GraphQL APIs** using a multi-layer AI agent architecture powered by the **Model Context Protocol (MCP)**.
+**ContractIQ** is a fully generic, spec-driven agentic test automation framework designed to test **UI applications** and **backend REST/GraphQL APIs** using a multi-layer AI agent architecture powered by the **Model Context Protocol (MCP)**.
 
-Unlike traditional test automation tools tied to a proprietary platform, SPECTRA is:
+Unlike traditional test automation tools tied to a proprietary platform, ContractIQ is:
 
 - **Spec-driven** – Ingests OpenAPI 3.x, Postman collections, AsyncAPI, or custom YAML specs to auto-generate tests.
 - **Platform-agnostic** – No vendor lock-in; runs on any CI/CD system (GitHub Actions, GitLab CI, Jenkins, Azure DevOps).
@@ -20,12 +20,12 @@ Unlike traditional test automation tools tied to a proprietary platform, SPECTRA
 - **Dual-mode** – Covers both UI (browser via Playwright) and Backend API (REST/GraphQL/gRPC) testing from the same framework.
 - **Zero-migration** – Works alongside existing test suites; does not break existing tests.
 
-### Why SPECTRA?
+### Why ContractIQ?
 
-In an enterprise world of thousands of microservices, "testing" isn't enough. You need **Contract-Driven Intelligence**.
+In an enterprise world of thousands of microservices, "testing" isn't enough. You need **Contract Intelligence**.
 
-1. **Spec-as-Truth:** Unlike generic AI testers, SPECTRA uses your API specs (OpenAPI, AsyncAPI, etc.) as the absolute source of truth.
-2. **Autonomous Reasoning:** It doesn't just run scripts; it reasons about contract violations, identifies infrastructure bottlenecks, and executes complex end-to-end flows.
+1. **Contract-as-Truth:** Unlike generic AI testers, ContractIQ uses your API specs as the absolute source of truth.
+2. **Autonomous IQ:** It doesn't just run scripts; it reasons about contract violations, identifies infrastructure bottlenecks, and executes complex end-to-end flows.
 3. **Governance-First:** It speaks the language of leadership—reporting quality in terms of compliance, revenue-at-risk, and service-level objectives (SLOs).
 
 ---
@@ -51,7 +51,7 @@ In an enterprise world of thousands of microservices, "testing" isn't enough. Yo
 
 ## Model Context Protocol (MCP) Integration
 
-SPECTRA is **MCP-Native**. This allows our agents to:
+ContractIQ is **MCP-Native**. This allows our agents to:
 - **Persist Memory:** Context travels across test sessions.
 - **Connect Silos:** Functional agents share state with Security agents in real-time.
 - **Deep Visibility:** Agents access server logs and infra state to verify "why" a contract failed.
@@ -62,7 +62,7 @@ SPECTRA is **MCP-Native**. This allows our agents to:
 
 ### 1. Installation
 ```bash
-pip install spectra-qe
+pip install contractiq
 ```
 
 ### 2. Configure MCP
@@ -70,7 +70,7 @@ Create a `.mcp.json` in your project root to enable cross-session intelligence.
 
 ### 3. Run Your First Validation
 ```bash
-python run_spectra.py --spec https://api.yoursite.com/openapi.json
+python run_contractiq.py --spec https://api.yoursite.com/openapi.json
 ```
 
 ---
@@ -84,7 +84,7 @@ python run_spectra.py --spec https://api.yoursite.com/openapi.json
 ---
 
 ## License
-SPECTRA is open-source software licensed under the [Apache 2.0 License](LICENSE).
+ContractIQ is open-source software licensed under the [Apache 2.0 License](LICENSE).
 
 ---
-*“SPECTRA: Where the Spec meets the Speed of AI.”*
+*“ContractIQ: Where the Spec meets the Speed of AI.”*
