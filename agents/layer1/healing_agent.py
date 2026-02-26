@@ -1,4 +1,4 @@
-"""SPECTRA Healing Agent - Layer 1
+"""ContractIQ Healing Agent - Layer 1
 
 AI-powered self-healing for broken tests with 80%+ auto-repair success rate.
 Handles selector changes, endpoint modifications, and schema drift.
