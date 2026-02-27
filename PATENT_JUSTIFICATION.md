@@ -241,6 +241,6 @@ ContractIQ represents a significant innovation in the field of automated softwar
 
 **Document Version**: 1.0  
 **Last Updated**: January 2025  
-**Author**: Sri Atluri  
+**Author**: Vamsee Krishna Srirama  
 **Status**: Internal Review  
 **Confidentiality**: Attorney-Client Privileged
