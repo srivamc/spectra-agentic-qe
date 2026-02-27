@@ -1,3 +1,5 @@
+
+[![Patent Pending](https://img.shields.io/badge/Patent-Pending-orange.svg)](PATENT_JUSTIFICATION.md)
 # ContractIQ: Autonomous Contract-Driven Quality Engineering
 
 > **The "CEO of Quality" for the Modern SDLC.**
