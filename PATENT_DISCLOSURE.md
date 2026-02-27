@@ -140,3 +140,10 @@ For inventors based in India, it is **highly recommended** to file with the **In
 - **Startup India IP Program**: Fast-track examination and fee rebates
 - **Patent Facilitation Centers**: Free assistance available across India
 - **Controller General of Patents**: patent.gov.in for latest updates
+
+
+---
+**Date**: January 2025  
+**Author/Inventor**: Vamsee Krishna Srirama  
+**Status**: Internal Review  
+**Confidentiality**: Project Confidential
