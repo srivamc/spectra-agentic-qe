@@ -1,0 +1,130 @@
+# ContractIQ Feature Flag Configuration
+# ===========================================
+# Every feature in ContractIQ is independently togglable.
+# Set flags here OR override with environment variables at runtime.
+#
+# Environment variable format: CIQ_<FLAG_NAME_UPPER>=true|false
+# Example: CIQ_IMMUTABLE_LEDGER=true python demo/app.py
+#
+# Author: Vamsee Krishna Srirama
+# Version: 2.0.0
+
+# ---------------------------------------------------------------------------
+# GROUP 1: Core Quality Engineering (Default: ON)
+# These are fundamental to ContractIQ's value proposition.
+# Disable only if you want a stripped-down execution mode.
+# ---------------------------------------------------------------------------
+feature_flags:
+
+  # Multi-agent parallel execution mesh (MASAM)
+  # Env: CIQ_AGENT_SWARM=true|false
+  agent_swarm: true
+
+  # Privacy-safe synthetic test data generation
+  # Env: CIQ_SYNTHETIC_DATA=true|false
+  synthetic_data: true
+
+  # Autonomous self-healing for broken selectors and test flows
+  # Env: CIQ_SELF_HEALING=true|false
+  self_healing: true
+
+# ---------------------------------------------------------------------------
+# GROUP 2: AI & Cryptographic Integrity (Default: ON)
+# Powers ZK proofs and adversarial test generation.
+# Disable for lightweight / low-compute environments.
+# ---------------------------------------------------------------------------
+
+  # Zero-Knowledge Quality Proof generation (ZK-QP)
+  # Generates SHA-256 cryptographic hashes of test execution payloads
+  # Env: CIQ_ZK_PROOFS=true|false
+  zk_proofs: true
+
+  # Adversarial / chaos testing agent
+  # Performs mutation testing, boundary injection, schema violation probing
+  # Env: CIQ_ADVERSARIAL_QE=true|false
+  adversarial_qe: true
+
+# ---------------------------------------------------------------------------
+# GROUP 3: Compliance & Protocol (Default: ON)
+# ACaC contract drift detection and MCP agent communication.
+# Disable compliance_acac for non-contract-driven test pipelines.
+# ---------------------------------------------------------------------------
+
+  # Agent-as-a-Client: detects API contract drift against OpenAPI spec
+  # Env: CIQ_COMPLIANCE_ACaC=true|false
+  compliance_acac: true
+
+  # Model Context Protocol (MCP) agent communication gateway
+  # Required for multi-agent orchestration
+  # Env: CIQ_MCP_GATEWAY=true|false
+  mcp_gateway: true
+
+# ---------------------------------------------------------------------------
+# GROUP 4: Enterprise Optional (Default: OFF)
+# Heavyweight enterprise features. Enable for regulated industries.
+# Blockchain ledger requires external infrastructure to be production-ready.
+# ---------------------------------------------------------------------------
+
+  # IMMUTABLE BLOCKCHAIN LEDGER
+  # When ON: ZK proof hashes are anchored to a tamper-proof append-only ledger
+  # When OFF: ZK proofs are computed and returned via API but NOT persisted to blockchain
+  # Use case: Finance, Healthcare, Defense, Legal (SOC2, HIPAA, FedRAMP compliance)
+  # Env: CIQ_IMMUTABLE_LEDGER=true|false
+  immutable_ledger: false
+
+  # RASUI: Risk-Adaptive Smart UI test prioritization
+  # Dynamically scores UI components by risk and prioritizes test execution
+  # Env: CIQ_RASUI_RISK_SCORING=true|false
+  rasui_risk_scoring: true
+
+# ---------------------------------------------------------------------------
+# AGENT CONFIGURATION
+# ---------------------------------------------------------------------------
+agent_config:
+  max_parallel_agents: 5
+  agent_timeout_seconds: 30
+  retry_on_failure: true
+  max_retries: 3
+
+# ---------------------------------------------------------------------------
+# MCP GATEWAY SETTINGS
+# ---------------------------------------------------------------------------
+mcp_gateway:
+  host: localhost
+  port: 8765
+  protocol: websocket
+  auth_required: false
+
+# ---------------------------------------------------------------------------
+# ZK PROOF SETTINGS
+# ---------------------------------------------------------------------------
+zk_proof:
+  algorithm: sha256
+  include_timestamp: true
+  include_contract_ref: true
+
+# ---------------------------------------------------------------------------
+# BLOCKCHAIN LEDGER SETTINGS (only active when immutable_ledger: true)
+# ---------------------------------------------------------------------------
+blockchain_ledger:
+  provider: mock  # Options: mock | ethereum | hyperledger | custom
+  network: testnet
+  contract_address: null  # Set when using real blockchain
+  gas_limit: 21000
+
+# ---------------------------------------------------------------------------
+# SYNTHETIC DATA SETTINGS
+# ---------------------------------------------------------------------------
+synthetic_data:
+  user_count: 100
+  order_count: 500
+  locale: en_US
+  seed: 42  # Set for reproducible test data
+
+# ---------------------------------------------------------------------------
+# RASUI SETTINGS
+# ---------------------------------------------------------------------------
+rasui:
+  risk_threshold: 0.7  # Components above this score get priority execution
+  scoring_model: heuristic  # Options: heuristic | ml_model
+  include_visual_regression: false
