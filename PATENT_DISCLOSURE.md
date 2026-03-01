@@ -21,7 +21,7 @@ ContractIQ is an autonomous QE framework that uses "Contract-as-Truth" (OpenAPI,
 3. **MCP-Integrated Intelligent Memory**: Uses the Model Context Protocol (MCP) to persist state and context across different test runs and different agent types.
 4. **Generative Adversarial Quality Engineering (GA-QE)**: A breakthrough mechanism where a "Breaker Agent" (Adversary) evolves complex attack vectors to violate contracts, while a "Fixer Agent" (Defender) evolves tests and code fixes to prevent them.
 5. **Autonomous Compliance-as-Contract (ACaC)**: Uses LLM-Reasoning to translate legal/regulatory text (GDPR, SOC2, HIPAA) into machine-testable quality contracts.
-6. **Dynamic Contract Synthesis**: Autonomously observes system behavior to synthesize contracts for legacy systems where documentation is missing.
+6. **Dynamic Contract Synthesis**: Autonomously observes system Enrich Patent Disclosure with MASAM, HAT, and ZK-QP Revolutionary Featuresbehavior to synthesize contracts for legacy systems where documentation is missing.
 
 ## 5. Description of Novel Aspects
 - **Autonomous Root Cause Analysis (ARCA)**: Reasons through logs, infra state, and spec violations to provide a definitive root cause.
